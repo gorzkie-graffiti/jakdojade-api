@@ -6,3 +6,4 @@ route_dump.json
 *.har
 __pycache__/
 *.pyc
+/.freebuff

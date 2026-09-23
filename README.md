@@ -15,6 +15,7 @@ A reverse-engineered Node.js client for the Jakdojade public transport API.
 ```bash
 npm install jakdojade-api
 ```
+
 *(Note: This package is currently private/local. You can install it from this repository)*
 
 ## Usage
@@ -87,8 +88,18 @@ const results = await client.search(query);
 - `.avoidChanges(mode)`: Set change preference (`min`, `none`, etc.).
 - `.connectionType(type)`: Set algorithm preference (`fast`, `optimal`, `convenient`).
 
+## Contributors
+
+- **Grok** – a little bit
+- **DeepSeek** – main idea and prompter
+- **GLM** – coded the J2ME app (if you don't see it i didn't just commit it yet)
+- **Me** – copy pasted everything and kept click Accept
+- **Gemini 3 Pro** – I don't remember what he did
+
 ## Disclaimer
 
 This library is for educational purposes only. It is not affiliated with or endorsed by Jakdojade. Use responsibly.
-<br>
-**This was fully vibecoded using Gemini 3 Pro, any bugs report will be welcome <3**
+
+This was fully vibecoded using Gemini 3 Pro, DeepSeek, Grok, and GLM. Any bugs report will be welcome <3
+
+
