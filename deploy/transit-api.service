@@ -1,0 +1,29 @@
+# Optional: a proper systemd unit instead of the cron @reboot entry.
+# Installing it needs sudo, so it is not applied by the deploy script:
+#
+#   sudo cp deploy/transit-api.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now transit-api
+#
+# The cron entry written by the deploy is only used because it needs no sudo.
+[Unit]
+Description=Ember transit API (legacy text + modern JSON)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=mateusz_pierzchala2005
+WorkingDirectory=/home/mateusz_pierzchala2005/transit-api
+Environment=PORT=5000
+Environment=HOST=0.0.0.0
+Environment=CITY_SYMBOL=WARSZAWA
+Environment=DEFAULT_FROM=Plac Defilad 1
+ExecStart=/home/mateusz_pierzchala2005/.nvm/versions/node/v20.20.2/bin/node server/index.js
+Restart=always
+RestartSec=5
+StandardOutput=append:/home/mateusz_pierzchala2005/transit-api/transit-api.log
+StandardError=append:/home/mateusz_pierzchala2005/transit-api/transit-api.log
+
+[Install]
+WantedBy=multi-user.target

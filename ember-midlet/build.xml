@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Ember MIDlet build for the Sun WTK (CLDC 1.1 + MIDP 2.0).
+
+  Usage:
+      export WTK_HOME=/opt/sun-wtk        (or: ant -Dwtk.home=/opt/sun-wtk)
+      export JAVA8_HOME=/usr/lib/jvm/java-8-openjdk
+      ant
+
+  Produces dist/Ember.jar (preverified) and dist/Ember.jad with the real
+  MIDlet-Jar-Size filled in. Nothing else is needed to sideload.
+-->
+<project name="Ember" default="dist" basedir=".">
+
+    <property environment="env"/>
+    <property name="wtk.home" value="${env.WTK_HOME}"/>
+
+    <!--
+      The CLDC toolchain needs -source 1.4: from Java 7 on, javac compiles
+      string concatenation with java.lang.StringBuilder, which does not exist
+      in CLDC 1.1, so -source 7 will not even compile against cldcapi11.jar.
+      Point JAVA8_HOME (or -Djavac.exec=...) at a JDK 8 javac.
+    -->
+    <available property="jdk8.present" file="${env.JAVA8_HOME}/bin/javac"/>
+    <condition property="javac.exec"
+               value="${env.JAVA8_HOME}/bin/javac"
+               else="${java.home}/bin/javac">
+        <isset property="jdk8.present"/>
+    </condition>
+
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="preverified.dir" value="${build.dir}/preverified"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="jar.file" value="${dist.dir}/Ember.jar"/>
+    <property name="jad.file" value="${dist.dir}/Ember.jad"/>
+
+    <!-- Windows users: override with -Dpreverify.tool=%WTK_HOME%/bin/preverify.exe -->
+    <property name="preverify.tool" value="${wtk.home}/bin/preverify"/>
+
+    <property name="cldc.jar" value="${wtk.home}/lib/cldcapi11.jar"/>
+    <property name="midp.jar" value="${wtk.home}/lib/midpapi20.jar"/>
+    <property name="api.path" value="${cldc.jar}${path.separator}${midp.jar}"/>
+
+    <available property="wtk.found" file="${cldc.jar}"/>
+
+    <target name="require-wtk" unless="wtk.found">
+        <fail message="WTK not found. Set WTK_HOME or pass -Dwtk.home=/path/to/WTK2.5.2"/>
+    </target>
+
+    <target name="init" depends="require-wtk">
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${preverified.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <!-- -source/-target 1.4 keeps the class files loadable on a CLDC 1.1 VM. -->
+    <target name="compile" depends="init">
+        <echo message="javac: ${javac.exec}"/>
+        <javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               bootclasspath="${api.path}"
+               source="1.4"
+               target="1.4"
+               encoding="UTF-8"
+               debug="true"
+               fork="true"
+               executable="${javac.exec}"
+               includeantruntime="false">
+            <classpath>
+                <pathelement path="${api.path}"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <!-- Device-side verification; also the check that catches MIDP 3.0 slip-ups. -->
+    <target name="preverify" depends="compile">
+        <exec executable="${preverify.tool}" failonerror="true">
+            <arg value="-classpath"/>
+            <arg value="${api.path}"/>
+            <arg value="-d"/>
+            <arg value="${preverified.dir}"/>
+            <arg value="${classes.dir}"/>
+        </exec>
+    </target>
+
+    <target name="jar" depends="preverify">
+        <jar jarfile="${jar.file}" basedir="${preverified.dir}">
+            <manifest>
+                <attribute name="MIDlet-Name" value="Ember"/>
+                <attribute name="MIDlet-Vendor" value="kryst"/>
+                <attribute name="MIDlet-Version" value="1.0.0"/>
+                <attribute name="MIDlet-1" value="Ember, , ember.Ember"/>
+                <attribute name="MicroEdition-Configuration" value="CLDC-1.1"/>
+                <attribute name="MicroEdition-Profile" value="MIDP-2.0"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="dist" depends="jar">
+        <copy file="Ember.jad" tofile="${jad.file}" overwrite="true"/>
+        <length file="${jar.file}" property="jar.size"/>
+        <replace file="${jad.file}" token="MIDlet-Jar-Size: 0" value="MIDlet-Jar-Size: ${jar.size}"/>
+        <echo message="Ember.jar: ${jar.size} bytes -> ${jar.file}"/>
+        <echo message="Descriptor        -> ${jad.file}"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!--
+      Off-device tests for the parser, the CLDC-safe splitter, UTF-8 URL
+      encoding, shape scaling and the RMS cache. The real ember sources below
+      are compiled against the desktop shims in test/stubs; those shims are
+      never packaged into Ember.jar (the jar target only reads build/preverified).
+    -->
+    <target name="test">
+        <mkdir dir="${build.dir}/test-classes"/>
+        <javac destdir="${build.dir}/test-classes"
+               encoding="UTF-8"
+               debug="true"
+               includeantruntime="false">
+            <src path="${src.dir}"/>
+            <src path="test"/>
+            <include name="ember/HttpUtil.java"/>
+            <include name="ember/Route.java"/>
+            <include name="ember/WalkPart.java"/>
+            <include name="ember/TransitPart.java"/>
+            <include name="ParserTest.java"/>
+            <include name="**/javax/microedition/**"/>
+        </javac>
+        <java classname="ParserTest" fork="true" failonerror="true">
+            <classpath>
+                <pathelement location="${build.dir}/test-classes"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!-- Run in the bundled WTK emulator (needs a display). -->
+    <target name="emulate" depends="dist">
+        <exec executable="${wtk.home}/bin/emulator" failonerror="false">
+            <arg value="-Xdescriptor:${jad.file}"/>
+        </exec>
+    </target>
+</project>

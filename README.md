@@ -88,6 +88,37 @@ const results = await client.search(query);
 - `.avoidChanges(mode)`: Set change preference (`min`, `none`, etc.).
 - `.connectionType(type)`: Set algorithm preference (`fast`, `optimal`, `convenient`).
 
+## HTTP API (server/)
+
+`server/` wraps this client in an HTTP service with two front-ends over the same
+Jakdojade data: a compact text protocol for old phones, and full JSON for
+anything modern. It is deployed at `http://34.61.173.205:5000`
+(see `deploy/README.md`).
+
+Legacy - old devices, tiny payloads, no JSON parsing:
+
+- `GET /v?msg=z+A+do+B` -> `text/plain` UTF-8, up to 8 routes as `R`/`W`/`T` lines
+- `GET /v/map?route=0&part=0` -> 240x320 baseline JPEG of that walk leg
+
+Modern:
+
+- `GET /api/routes?msg=z+A+do+B` -> JSON incl. walk geometries as `[lon, lat]`
+- `GET /api/locations?q=text` -> location suggestions
+- `GET /api/health` -> liveness
+
+Shared query parameters: `city`, `from`, `to`, `at`, `limit`. The default city
+is `WARSZAWA`; `LODZ` and `PABIANICE` are also valid, and queries that mention
+Lodz/Pabianice are routed there automatically.
+
+```sh
+npm run serve          # PORT=5000 node server/index.js
+node server/tools/smoke.js "z Placu Defilad do Miedzynarodowej"   # end-to-end check
+```
+
+MIDlet builds for the J2ME client are published at `/download/` on the same
+service, so a phone can install over the air from
+`http://34.61.173.205:5000/download/Ember.jad`.
+
 ## Contributors
 
 - **Grok** – a little bit

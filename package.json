@@ -4,13 +4,15 @@
   "description": "Unofficial Jakdojade API Client",
   "main": "src/index.js",
   "scripts": {
-    "test": "node example_usage.js"
+    "test": "node example_usage.js",
+    "serve": "node server/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.6.0",
+    "jpeg-js": "^0.4.4",
     "uuid": "^9.0.0"
   }
 }

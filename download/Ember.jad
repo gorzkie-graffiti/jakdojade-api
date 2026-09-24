@@ -1,0 +1,8 @@
+MIDlet-Name: Ember
+MIDlet-Vendor: kryst
+MIDlet-Version: 1.0.0
+MIDlet-1: Ember, , ember.Ember
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Jar-URL: Ember.jar
+MIDlet-Jar-Size: 31995
