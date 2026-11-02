@@ -134,3 +134,16 @@ This library is for educational purposes only. It is not affiliated with or endo
 This was fully vibecoded using Gemini 3 Pro, DeepSeek, Grok, and GLM. Any bugs report will be welcome <3
 
 
+
+## License
+
+Licensed under the [GNU Affero General Public License v3.0 or later](LICENSE)
+(AGPL-3.0-or-later).
+
+The license covers the source code in this repository only. It grants no rights to
+the Jakdojade service, its API, its data, or its trademarks — you are responsible for
+complying with Jakdojade's terms of service.
+
+Commercial use is permitted only if you comply with the AGPL (publish the complete
+source of your modified version under the same license). For closed-source commercial
+use, a separate commercial license is required.
