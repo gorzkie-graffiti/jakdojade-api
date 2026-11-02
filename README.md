@@ -137,13 +137,16 @@ This was fully vibecoded using Gemini 3 Pro, DeepSeek, Grok, and GLM. Any bugs r
 
 ## License
 
-Licensed under the [GNU Affero General Public License v3.0 or later](LICENSE)
-(AGPL-3.0-or-later).
+This project is **source-available, not open source**. It is licensed under the
+[Noncommercial Copyleft License 1.0](LICENSE).
+
+- **No commercial use**, including paid hosting, paid support, or bundling into a
+  product or service you charge for.
+- **No closed source.** Any modified version you distribute or host must be
+  released in full under the same license, with complete source code.
 
 The license covers the source code in this repository only. It grants no rights to
-the Jakdojade service, its API, its data, or its trademarks — you are responsible for
-complying with Jakdojade's terms of service.
+the Jakdojade service, its API, its data, or its trademarks.
 
-Commercial use is permitted only if you comply with the AGPL (publish the complete
-source of your modified version under the same license). For closed-source commercial
-use, a separate commercial license is required.
+Commercial rights are available only under a separate written agreement with the
+maintainer.
