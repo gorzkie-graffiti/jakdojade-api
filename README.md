@@ -137,18 +137,23 @@ This was fully vibecoded using Gemini 3 Pro, DeepSeek, Grok, and GLM. Any bugs r
 
 ## License
 
-This project is **source-available, not open source**. It is licensed under the
-[Noncommercial Copyleft License 1.1](LICENSE).
+This project is source-available, not open-source.
 
-- **No paid commercial use.** You may not sell it, charge for access or hosting,
-  offer paid support based on it, or bundle it into a paid product. Internal use,
-  evaluation, and personal/hobby projects are fine — including at for-profit
-  companies.
-- **No closed source.** Any modified version you distribute or host must be
-  released in full under the same license, with complete source code.
+I want people to freely use, study, modify and share my work. However, I do not
+grant commercial rights by default.
 
-The license covers the source code in this repository only. It grants no rights to
-the Jakdojade service, its API, its data, or its trademarks.
+I chose this licensing model because I want my work to remain freely accessible
+without allowing others to turn it into a commercial product without my
+permission.
 
-Commercial rights are available only under a separate written agreement with the
-maintainer.
+If you need commercial rights, please contact the copyright holder.
+
+The license covers the source code in this repository only. It grants no rights
+to the Jakdojade service, its API, its data, or its trademarks.
+
+**In practice:** no selling, no paid hosting or SaaS, no paid support, and no
+bundling into a paid product. Internal use, evaluation, and personal or hobby
+projects are fine — including at for-profit companies. Any distributed or hosted
+fork must publish its complete source under the same license.
+
+Full terms: [Noncommercial Copyleft License 1.1](LICENSE).
