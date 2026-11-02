@@ -138,10 +138,12 @@ This was fully vibecoded using Gemini 3 Pro, DeepSeek, Grok, and GLM. Any bugs r
 ## License
 
 This project is **source-available, not open source**. It is licensed under the
-[Noncommercial Copyleft License 1.0](LICENSE).
+[Noncommercial Copyleft License 1.1](LICENSE).
 
-- **No commercial use**, including paid hosting, paid support, or bundling into a
-  product or service you charge for.
+- **No paid commercial use.** You may not sell it, charge for access or hosting,
+  offer paid support based on it, or bundle it into a paid product. Internal use,
+  evaluation, and personal/hobby projects are fine — including at for-profit
+  companies.
 - **No closed source.** Any modified version you distribute or host must be
   released in full under the same license, with complete source code.
 

@@ -1,4 +1,4 @@
-# Noncommercial Copyleft License 1.0
+# Noncommercial Copyleft License 1.1
 
 Required Notice: Copyright (c) 2026 gorzkie-graffiti
 
@@ -15,32 +15,45 @@ The licensor grants you a copyright license to do everything with the software
 that would otherwise infringe the licensor's copyright in it, but only for a
 Noncommercial Purpose and only as permitted by this license.
 
-## 3. Noncommercial Purpose
+## 3. Commercial and Noncommercial Purposes
 
-A "Noncommercial Purpose" is any purpose that is not intended for or directed
-toward commercial advantage or monetary compensation. Without limiting that
-definition, the following are commercial and are not Noncommercial Purposes:
+A "Commercial Purpose" is a purpose that is primarily intended for or directed
+toward commercial advantage or monetary compensation **through the software
+itself**. The following are Commercial Purposes:
 
 (a) selling, renting, leasing, licensing, or otherwise charging anyone for the
-software or a derivative work;
+software or a derivative work, or for access to it;
 
-(b) offering the software or a derivative work as a paid service, including
-software-as-a-service, hosted access, hosting, consulting, or support;
+(b) operating the software or a derivative work as a hosted or network service
+for which you charge, including software-as-a-service, paid hosting, or paid
+access;
 
-(c) bundling the software or a derivative work into a product, service, or
-distribution for which you charge, or that is used to advertise or sell
-something else;
+(c) charging for support, consulting, customization, or maintenance that is
+substantially based on the software;
 
-(d) use by a for-profit entity in the operation of its business, including
-internal use to produce goods or services for sale;
+(d) including the software or a derivative work in a product, bundle, or service
+for which you charge, or using it as a paid feature of a product or service;
 
-(e) use intended to generate revenue, advertising income, subscription income,
-or other commercial benefit.
+(e) using the software or a derivative work as the primary basis of a business
+whose revenue comes from the software.
 
-Use by a charitable organization, educational institution, public research
-organization, public safety or health organization, environmental protection
-organization, or government institution for its public-interest mission is a
-Noncommercial Purpose, regardless of the source of its funding.
+The following are **not** Commercial Purposes, even if you are a for-profit
+entity or receive incidental revenue:
+
+(f) internal use, evaluation, development, testing, prototyping, continuous
+integration, or running the software on your own machines or infrastructure,
+without charging anyone for the software;
+
+(g) personal, hobby, educational, research, or portfolio use;
+
+(h) a personal or hobby project that carries incidental advertising or
+donations, where the software is not itself the product being sold;
+
+(i) using the software on a website that markets or promotes your own unrelated
+products or services.
+
+Charities, nonprofits, schools, and government bodies are subject to the same
+rules as everyone else; they receive no special exemption under this license.
 
 ## 4. Distribution, Copyleft, and Source Code
 
