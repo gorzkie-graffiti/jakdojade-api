@@ -92,7 +92,7 @@ const results = await client.search(query);
 
 `server/` wraps this client in an HTTP service with two front-ends over the same
 Jakdojade data: a compact text protocol for old phones, and full JSON for
-anything modern. It is deployed at `http://34.61.173.205:5000`
+anything modern. It is deployed at `http://34.56.190.184:5000`
 (see `deploy/README.md`).
 
 Legacy - old devices, tiny payloads, no JSON parsing:
@@ -117,7 +117,7 @@ node server/tools/smoke.js "z Placu Defilad do Miedzynarodowej"   # end-to-end c
 
 MIDlet builds for the J2ME client are published at `/download/` on the same
 service, so a phone can install over the air from
-`http://34.61.173.205:5000/download/Ember.jad`.
+`http://34.56.190.184:5000/download/Ember.jad`.
 
 ## Contributors
 

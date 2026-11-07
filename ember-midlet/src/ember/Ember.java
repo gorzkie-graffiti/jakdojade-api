@@ -44,7 +44,7 @@ public class Ember extends MIDlet {
      * Port 5000 hosts the transit API (legacy /v text + /v/map JPEG); port 3000
      * is the separate Next.js Ember app.
      */
-    static final String BASE_URL = "http://34.61.173.205:5000";
+    static final String BASE_URL = "http://34.56.190.184:5000";
 
     static final String DEFAULT_QUERY = "Międzynarodowa";
 

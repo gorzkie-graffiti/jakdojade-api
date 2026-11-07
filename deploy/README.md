@@ -1,6 +1,6 @@
 # Deploying the transit API
 
-Live at **http://34.61.173.205:5000** (GCP VM, hostname `j2me-server`, user
+Live at **http://34.56.190.184:5000** (GCP VM, hostname `j2me-server`, user
 `mateusz_pierzchala2005`). It runs next to the unrelated Next.js Ember app on
 port 3000 and does not touch it.
 
@@ -38,20 +38,20 @@ systemd; installing that one *does* need `sudo`.
 # from the repo root
 chmod +x deploy/run.sh
 tar czf - --exclude=./node_modules --exclude=./.git . \
-  | ssh mateusz_pierzchala2005@34.61.173.205 'tar xzf - -C ~/transit-api'
+  | ssh mateusz_pierzchala2005@34.56.190.184 'tar xzf - -C ~/transit-api'
 
 # dependencies (node must be on PATH for npm's shebang)
-ssh mateusz_pierzchala2005@34.61.173.205 \
+ssh mateusz_pierzchala2005@34.56.190.184 \
   'export PATH="$HOME/.nvm/versions/node/v20.20.2/bin:$PATH"; \
    cd ~/transit-api && npm install --omit=dev --no-audit --no-fund'
 
 # restart
-ssh mateusz_pierzchala2005@34.61.173.205 \
+ssh mateusz_pierzchala2005@34.56.190.184 \
   'pids=$(pgrep -f "[s]erver/index\.js"); [ -n "$pids" ] && kill $pids; sleep 2; \
    cd ~/transit-api && (setsid nohup ./deploy/run.sh >/dev/null 2>&1 </dev/null &)'
 
 # verify
-curl -s http://34.61.173.205:5000/api/health
+curl -s http://34.56.190.184:5000/api/health
 ```
 
 ## Configuration
@@ -77,14 +77,14 @@ without a `city` parameter.
 ## Logs and health
 
 ```sh
-ssh mateusz_pierzchala2005@34.61.173.205 'tail -f ~/transit-api/transit-api.log'
-curl -s http://34.61.173.205:5000/api/health
+ssh mateusz_pierzchala2005@34.56.190.184 'tail -f ~/transit-api/transit-api.log'
+curl -s http://34.56.190.184:5000/api/health
 ```
 
 ## Rollback
 
 ```sh
-ssh mateusz_pierzchala2005@34.61.173.205 \
+ssh mateusz_pierzchala2005@34.56.190.184 \
   'pids=$(pgrep -f "[s]erver/index\.js"); [ -n "$pids" ] && kill $pids; crontab -l | grep -v transit-api | crontab -'
 rm -rf ~/transit-api   # optional
 ```

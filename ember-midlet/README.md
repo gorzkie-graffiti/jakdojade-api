@@ -54,7 +54,7 @@ so a watchdog thread closes the connection after 15 s; the resulting
 `IOException` is surfaced as `Timeout 15s`.
 
 **This contract is implemented by `server/` in this repo** and deployed at
-`http://34.61.173.205:5000` (port **5000**, not 3000 - 3000 is the separate
+`http://34.56.190.184:5000` (port **5000**, not 3000 - 3000 is the separate
 Next.js Ember app, which answers `/v` with chat prose for its own legacy client
 `EmberVeer`). `BASE_URL` in `Ember.java` already points at 5000.
 
@@ -135,7 +135,7 @@ MicroEmulator 2.0.4 speaks `javax.microedition.io` over the desktop's
 
 **Over the air (easiest)**
 
-Open `http://34.61.173.205:5000/download/` on the phone and install `Ember.jad`
+Open `http://34.56.190.184:5000/download/` on the phone and install `Ember.jad`
 (the JAD's `MIDlet-Jar-URL` is relative, so the JAR is fetched from the same
 directory automatically). That directory is served by the transit API itself.
 
